@@ -20,7 +20,7 @@
 </p>
 
 <p>
-  <%= link_to 'list of beers', beers_path %>
+  <%= "Has " + pluralize(@brewery.ratings.size, 'rating') + " with an average of " + @brewery.average_rating %>
 </p>
 
 

@@ -1,8 +1,18 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate, :only =>[:destroy]
 
   # GET /breweries
   # GET /breweries.json
+
+
+  def authenticate
+    admin_accounts = { "admin" => "secret", "pekka" => "beer", "arto" => "foobar", "matti" => "ittam"}
+    authenticate_or_request_with_http_basic do |username, password|
+      admin_accounts.has_key?(username) and password=admin_accounts[username]
+    end
+  end
+
   def index
     @breweries = Brewery.all
 
