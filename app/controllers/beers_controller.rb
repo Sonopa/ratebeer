@@ -1,5 +1,7 @@
 class BeersController < ApplicationController
   before_action :set_beer, only: [:show, :edit, :update, :destroy]
+  before_action :set_breweries_and_styles_for_template, only: [:new, :edit]
+  before_action :ensure_that_signed_in, except: [:index, :show]
 
   # GET /beers
   # GET /beers.json
@@ -15,8 +17,6 @@ class BeersController < ApplicationController
   # GET /beers/new
   def new
     @beer = Beer.new
-    @breweries = Brewery.all
-    @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter"]
   end
 
   # GET /beers/1/edit
@@ -33,6 +33,7 @@ class BeersController < ApplicationController
         format.html { redirect_to beers_path, notice: 'Beer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @beer }
       else
+        set_breweries_and_styles_for_template
         format.html { render action: 'new' }
         format.json { render json: @beer.errors, status: :unprocessable_entity }
       end
@@ -56,11 +57,20 @@ class BeersController < ApplicationController
   # DELETE /beers/1
   # DELETE /beers/1.json
   def destroy
-    @beer.destroy
-    respond_to do |format|
-      format.html { redirect_to beers_url }
-      format.json { head :no_content }
+    if current_user.admin
+      @beer.destroy
+      respond_to do |format|
+        format.html { redirect_to beers_url }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to :back, notice: "You need to be an admin to do this"
     end
+  end
+
+  def set_breweries_and_styles_for_template
+    @breweries = Brewery.all
+    @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter"]
   end
 
   private

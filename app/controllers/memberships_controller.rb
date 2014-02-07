@@ -1,5 +1,6 @@
 class MembershipsController < ApplicationController
   before_action :set_membership, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_that_signed_in, except: [:index, :show]
 
   # GET /memberships
   # GET /memberships.json
@@ -25,17 +26,19 @@ class MembershipsController < ApplicationController
   # POST /memberships.json
   def create
     @membership = Membership.new(membership_params)
+    @membership.user = current_user
 
-    respond_to do |format|
-      if @membership.save
-        current_user.memberships << @membership
-        format.html { redirect_to @membership, notice: 'Membership was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @membership }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @membership.errors, status: :unprocessable_entity }
+
+      respond_to do |format|
+        if @membership.save
+          format.html { redirect_to @membership, notice: 'Membership was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @membership }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @membership.errors, status: :unprocessable_entity }
+        end
       end
-    end
+
   end
 
   # PATCH/PUT /memberships/1
@@ -57,7 +60,7 @@ class MembershipsController < ApplicationController
   def destroy
     @membership.destroy
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_to memberships_url }
       format.json { head :no_content }
     end
   end

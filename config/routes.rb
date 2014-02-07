@@ -13,7 +13,7 @@ Ratebeer::Application.routes.draw do
 
   get 'kaikki_bisset', to: 'beers#index'
 
-  get 'singup', to: 'user#new'
+  get 'signup', to: 'users#new'
 
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'

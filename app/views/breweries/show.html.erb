@@ -20,7 +20,11 @@
 </p>
 
 <p>
-  <%= "Has " + pluralize(@brewery.ratings.size, 'rating') + " with an average of " + @brewery.average_rating %>
+  <% if @brewery.ratings.size > 0 %>
+    <%= "Has " + pluralize(@brewery.ratings.size, 'rating') + " with an average of " + @brewery.average_rating.to_s %>
+  <% else %>
+      <%= "Has " + pluralize(@brewery.ratings.size, 'rating') %>
+  <% end %>
 </p>
 
 

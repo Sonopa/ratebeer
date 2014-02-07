@@ -25,6 +25,10 @@
     </ul>
 <% end %>
 
+<p>Favorite beer style: <%= @user.favorite_style %></p>
+<p>Favorite brewery: <%= @user.favorite_brewery %></p>
+<p>Favorite beer: <%= @user.favorite_beer %></p>
+
 <% unless @user.memberships.nil? %>
     <p><strong>Club memberships:</strong></p>
     <ul>

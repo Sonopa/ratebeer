@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+- 2.0.0
+script:
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+    secure: ufUcZ74jyW7L+XtMXQQBJB4WnPHFp9ESroR6HwC/bO9J/wU+TCjKHjkWQUH1EcQfZuAnQP0yJD6xsiGVWlhm83GL/jV3/vUBcortMtLbcAq9eKENaxlccYksg4+IyprsOfIz0QwoS/LWjAkQ7rLOp6S/6l7AHmZ5G91jvWct/10=
+  app: thawing-escarpment-4510
+  on:
+    repo: Sonopa/ratebeer
+  run: "rake db:migrate"
