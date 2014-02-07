@@ -1,4 +1,4 @@
-thawing-escarpment-4510.herokuapp.com/breweries
+https://thawing-escarpment-4510.herokuapp.com/breweries
 
 
 [![Build Status](https://travis-ci.org/Sonopa/ratebeer.png)](https://travis-ci.org/Sonopa/ratebeer)
