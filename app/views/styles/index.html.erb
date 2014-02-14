@@ -1,0 +1,31 @@
+<h1>Beer styles</h1>
+
+<p id="notice"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @styles.each do |style| %>
+      <tr>
+        <td><%= style.name %></td>
+        <td><%= style.description %></td>
+        <td><%= link_to 'Show', style %></td>
+        <td><%= link_to 'Edit', edit_style_path(style) unless current_user.nil? %></td>
+        <td><%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' } unless current_user.nil? %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Style', new_style_path unless current_user.nil? %>

@@ -27,7 +27,12 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
+  gem 'webmock'
 end
+
+gem "rails-settings-cached", "0.3.1"
+
+gem 'httparty'
 
 gem 'simplecov', require: false
 
