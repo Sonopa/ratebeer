@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @style.name %>
-</p>
+<h2><%= @style.name %></h2>
 
 <p>
   <strong>Description:</strong>
@@ -12,9 +9,13 @@
 
 <p>
   <strong>Beers:</strong>
+  <ul>
   <% @style.beers.each do |beer| %>
+      <li>
       <%= link_to beer.name, beer %>
+      </li>
   <% end %>
+  </ul>
 </p>
 
 <%= link_to 'Edit', edit_style_path(@style) unless current_user.nil? %> |
