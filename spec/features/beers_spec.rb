@@ -4,6 +4,7 @@ describe "Beer" do
   before :each do
     FactoryGirl.create(:brewery, name:"Koff")
     FactoryGirl.create(:user)
+    FactoryGirl.create(:style)
     visit signin_path
     fill_in('username', with:'Pekka')
     fill_in('password', with:'Foobar1')
@@ -14,7 +15,7 @@ describe "Beer" do
     visit new_beer_path
 
     select('Koff', from: 'beer_brewery_id')
-    select('Lager', from: 'beer_style')
+    select('Lager', from: 'beer_style_id')
     fill_in('beer_name', with: 'Koff')
 
     expect{
@@ -26,7 +27,7 @@ describe "Beer" do
     visit new_beer_path
 
     select('Koff', from: 'beer_brewery_id')
-    select('Lager', from: 'beer_style')
+    select('Lager', from: 'beer_style_id')
 
     expect(Beer.count).to eq(0)
     expect(current_path).to eq(new_beer_path)

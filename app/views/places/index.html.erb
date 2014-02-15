@@ -18,7 +18,7 @@
           <tr>
             <% Place.rendered_fields.each do |f| %>
                 <% if f.to_s=="name" %>
-                    <td><%= link_to place.name, controller: "places", action: "show", id:place.id %></td>
+                    <td><%= link_to place.name, "places/#{place.id}"%></td>
                 <% else %>
                     <td><%= place.send(f) %></td>
                 <% end %>

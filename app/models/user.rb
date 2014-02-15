@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
     return nil if ratings.empty?
     best_score = 0
     fav_style = nil
-    styles = ratings.group_by{|r| r.beer.style}
+    styles = ratings.group_by{|r| r.beer.style.name}
     styles.each do |key, array|
       avg = average(array)
       if avg >= best_score
