@@ -1,6 +1,6 @@
-<h1>Listing beer_clubs</h1>
+<h1>Listing beer clubs</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to('New Beer club', new_beer_club_path) unless current_user.nil? %>
+<%= link_to('New Beer club', new_beer_club_path, class:"btn btn-primary") unless current_user.nil? %>

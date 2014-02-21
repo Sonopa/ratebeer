@@ -2,10 +2,9 @@
 
 <h2><%= @user.username %></h2>
 
-<%= link_to 'Back', users_path %>|
 <% if current_user == @user %>
-    <%= link_to 'Edit', edit_user_path(@user) %>
-    <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Edit', edit_user_path(@user), class:"btn btn-primary" %>
+    <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
 <% end %>
 
 <% unless @user.ratings.count == 0 %>
@@ -33,7 +32,12 @@
     <p><strong>Club memberships:</strong></p>
     <ul>
       <% @user.memberships.all.each do |m| %>
-        <li><%= m.beer_club.name %> <%= link_to 'delete', m, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+        <li><%= m.beer_club.name %>
+          <% if current_user == @user %>
+            <%= link_to 'delete', m, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </li>
       <% end %>
     </ul>
 <% end %>
+<%= link_to 'Back', users_path, class:"btn btn-primary" %>
