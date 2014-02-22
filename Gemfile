@@ -43,6 +43,8 @@ gem "rails-settings-cached", "0.3.1"
 
 gem 'httparty'
 
+gem 'rack-mini-profiler'
+
 gem 'simplecov', require: false
 
 # Use SCSS for stylesheets

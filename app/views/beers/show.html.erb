@@ -1,26 +1,26 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @beer.name %>
-</p>
-
-<p>
-  <strong>Style:</strong>
-  <%= @beer.style %>
-</p>
-
-<p>
-  <strong>Brewery:</strong>
-  <%= @beer.brewery.name %>
-</p>
-
-<% if @beer.ratings.empty? %>
-    <p>beer has not been rated</p>
-<% else %>
+<% cache @beer do %>
     <p>
-        <%= "Has " + pluralize(@beer.ratings.size, 'rating') + " with an average of " + @beer.average_rating.to_s %>
+      <strong>Name:</strong>
+      <%= @beer.name %>
     </p>
+
+    <p>
+      <strong>Style:</strong>
+      <%= @beer.style %>
+    </p>
+
+    <p>
+      <strong>Brewery:</strong>
+      <%= @beer.brewery.name %>
+    </p>
+
+    <% if @beer.ratings.empty? %>
+        <p>beer has not been rated</p>
+    <% else %>
+        <p>
+            <%= "Has " + pluralize(@beer.ratings.size, 'rating') + " with an average of " + round(@beer.average_rating).to_s %>
+        </p>
+    <% end %>
 <% end %>
 
 <% if current_user %>
@@ -36,5 +36,6 @@
 
 <p></p>
 
-<%= link_to 'Edit', edit_beer_path(@beer) unless current_user.nil? %> |
-<%= link_to 'Back', beers_path %>
+
+<%= edit_and_destroy_buttons(@beer) %>
+<%= link_to 'Back', beers_path, class:"btn btn-primary"  %>
